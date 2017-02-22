@@ -43,8 +43,9 @@ if(jQuery) (function($) {
             });
         }, options.delay);
       });
+
+      return this;
     }
   });
 
-  return this;
 })(jQuery);
