@@ -1,0 +1,21 @@
+{
+  "name": "@claviska/jquery-animate-css",
+  "description": "A micro-plugin for using Animate.css with jQuery.",
+  "version": "1.0.0",
+  "author": "Cory LaViska",
+  "homepage": "https://github.com/claviska/jquery-animateCSS",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": ">= 1.8.x"
+  },
+  "peerDependencies": {
+    "animate.css": "^3.0.x"
+  },
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-help": "^1.6.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.5.3"
+  }
+}
