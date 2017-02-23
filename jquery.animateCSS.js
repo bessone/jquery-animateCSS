@@ -34,7 +34,7 @@ if(jQuery) (function($) {
         setTimeout(function() {
           $(el)
             .addClass('animated ' + options.animation)
-            .on('animationend mozAnimationEnd MSAnimationEnd oanimationend webkitAnimationEnd', function() {
+            .one('animationend mozAnimationEnd MSAnimationEnd oanimationend webkitAnimationEnd', function() {
               // Remove classes when animation ends
               $(el).removeClass('animated ' + options.animation);
 
