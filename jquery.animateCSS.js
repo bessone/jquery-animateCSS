@@ -9,7 +9,23 @@ if(jQuery) (function($) {
   'use strict';
 
   $.extend($.fn, {
-    animateCSS: function(animation, options) {
+    animateCSS: function(animation) {
+      var options = {};
+
+      // Detect signature
+      if(typeof arguments[1] === 'object') {
+        // $(el).animateCSS('animation', options)
+        options = arguments[1];
+      } else if(typeof arguments[1] === 'function') {
+        // $(el).animateCSS('animation', complete)
+        options.complete = arguments[1];
+      } else if(typeof arguments[1] === 'number') {
+        // $(el).animateCSS('animation', duration, [complete])
+        options.duration = arguments[1];
+        if(typeof arguments[2] === 'function') options.complete = arguments[2];
+      }
+
+      // Merge options with defaults
       options = $.extend(true, {
         animation: animation,
         complete: function() {},
@@ -17,10 +33,11 @@ if(jQuery) (function($) {
         duration: 1000
       }, options);
 
+      // Apply animation to each element
       $(this).each(function() {
         var el = this;
 
-        // Apply duration
+        // Set duration
         if(options.duration) {
           $(el).css({
             '-moz-animation-duration': options.duration + 'ms',

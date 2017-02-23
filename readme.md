@@ -14,7 +14,7 @@ Features:
 - Custom durations without adding CSS.
 - Optional delay before animation.
 - Callback for when animations complete.
-- Compact! (About 50 lines)
+- Compact! (About 70 lines)
 
 ## Installing
 
@@ -26,17 +26,26 @@ npm install --save @claviska/jquery-animate-css
 
 ## Using the plugin
 
-Minimal example:
+The plugin accepts multiple argument signatures. Examples:
 
 ```javascript
-// Minimal example
+// Animation only
 $(el).animateCSS('bounce');
-```
 
-Example with all possible options:
+// Animation with duration
+$(el).animateCSS('bounce', 1000);
 
-```javascript
-// Example with all options
+// Animation with duration and callback
+$(el).animateCSS('bounce', 1000, function() {
+  // Animation complete!
+});
+
+// Animation with callback
+$(el).animateCSS('bounce', function() {
+  // Animation complete!
+});
+
+// Animation with all options
 $(el).animateCSS('fadeOut', {
   delay: 1000,
   duration: 300,
@@ -46,11 +55,15 @@ $(el).animateCSS('fadeOut', {
 });
 ```
 
-### Options
+### Animation
 
 The first argument is always the animation you want to use. You can find an up-to-date list in the Animate.css [readme file](https://github.com/daneden/animate.css).
 
-The second argument is an object containing any or all of the following properties:
+If an animation isn't working, make sure you're using the latest version of Animate.css and that your selector is correct.
+
+### Options
+
+When an object is passed as the second argument, it may contain the following properties:
 
 - `delay`: how long to wait (in milliseconds) before applying the animation (default `0`).
 - `duration`: the animation duration (default `1000`).
