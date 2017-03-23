@@ -49,9 +49,13 @@ if(jQuery) (function($) {
 
         // Animate it
         setTimeout(function() {
+          var animationEnd = 'animationend mozAnimationEnd MSAnimationEnd oanimationend webkitAnimationEnd';
+
           $(el)
             .addClass('animated ' + options.animation)
-            .one('animationend mozAnimationEnd MSAnimationEnd oanimationend webkitAnimationEnd', function() {
+            .on(animationEnd, function() {
+              $(this).off(animationEnd);
+
               // Remove classes when animation ends
               $(el).removeClass('animated ' + options.animation);
 
