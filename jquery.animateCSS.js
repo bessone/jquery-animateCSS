@@ -8,6 +8,23 @@
 if(jQuery) (function($) {
   'use strict';
 
+  function animate(el, options) {
+    var animationEnd = 'animationend mozAnimationEnd MSAnimationEnd oanimationend webkitAnimationEnd';
+
+    $(el)
+      .addClass('animated ' + options.animation)
+      // .one() doesn't seem to work as reliably as .on() + .off()
+      .on(animationEnd, function() {
+        $(this).off(animationEnd);
+
+        // Remove classes when animation ends
+        $(el).removeClass('animated ' + options.animation);
+
+        // Run complete callback
+        options.complete.call(el);
+      });
+  }
+
   $.extend($.fn, {
     animateCSS: function(animation) {
       var options = {};
@@ -48,21 +65,24 @@ if(jQuery) (function($) {
         }
 
         // Animate it
-        setTimeout(function() {
-          var animationEnd = 'animationend mozAnimationEnd MSAnimationEnd oanimationend webkitAnimationEnd';
-
-          $(el)
-            .addClass('animated ' + options.animation)
-            .on(animationEnd, function() {
-              $(this).off(animationEnd);
-
-              // Remove classes when animation ends
-              $(el).removeClass('animated ' + options.animation);
-
-              // Run complete callback
-              options.complete.call(el);
-            });
-        }, options.delay);
+        if(options.delay <= 0) {
+          //
+          // Note: using setTimeout with a zero duration causes execution to wait for the next tick,
+          // resulting in a minor performance issue. For example, the following would result in a
+          // quick visual blip in some browsers after the element is made visible but before
+          // animation starts:
+          //
+          //  $(el).property('hidden', false).animateCSS('slideInUp')
+          //
+          // This is why we don't use setTimeout when no delay is desired.
+          //
+          animate(el, options);
+        } else {
+          // Delay before animating
+          setTimeout(function() {
+            animate(el, options);
+          }, options.delay);
+        }
       });
 
       return this;
