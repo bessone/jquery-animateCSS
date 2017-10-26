@@ -14,7 +14,7 @@ Features:
 - Custom durations without adding CSS.
 - Optional delay before animation.
 - Callback for when animations complete.
-- Compact! (About 70 lines)
+- Compact! (About 110 lines)
 
 ## Installing
 
@@ -23,6 +23,8 @@ Include the minified version of this plugin in your project or install via NPM:
 ```
 npm install --save @claviska/jquery-animate-css
 ```
+
+This plugin can also be loaded as a module.
 
 ## Using the plugin
 
