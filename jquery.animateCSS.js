@@ -5,7 +5,6 @@
 //
 // Licensed under the MIT license: http://opensource.org/licenses/MIT
 //
-/* global define */
 (function(factory) {
   if(typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
